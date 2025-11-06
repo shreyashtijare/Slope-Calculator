@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slope Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Slope Calculator</h1>
+
+        <div class="input-group">
+            <label for="he">Higher Elevation (HE):</label>
+            <input type="number" id="he" placeholder="Enter higher elevation" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="le">Lower Elevation (LE):</label>
+            <input type="number" id="le" placeholder="Enter lower elevation" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="distance">Distance:</label>
+            <input type="number" id="distance" placeholder="Enter distance" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="slope">Slope (%):</label>
+            <input type="number" id="slope" placeholder="Enter slope percentage" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="decimalSelect">Decimal Precision:</label>
+            <select id="decimalSelect">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <button id="calculateBtn">Calculate</button>
+            <button id="resetBtn" class="secondary">Reset</button>
+        </div>
+
+        <div id="result"></div>
+
+        <button id="toggleDarkMode" class="darkmode-toggle">Toggle Dark Mode</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #222;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 350px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #222;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button.secondary {
+    background-color: #6c757d;
+}
+
+button.secondary:hover {
+    background-color: #5a6268;
+}
+
+#result {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.darkmode-toggle {
+    margin-top: 15px;
+    background-color: #343a40;
+}
+
+.darkmode-toggle:hover {
+    background-color: #23272b;
+}
+
+/* ===== Dark Mode ===== */
+body.dark {
+    background-color: #121212;
+    color: #f9f9f9;
+}
+
+body.dark .container {
+    background-color: #1e1e1e;
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+body.dark input,
+body.dark select {
+    background-color: #2b2b2b;
+    color: #f9f9f9;
+    border: 1px solid #555;
+}
+
+body.dark button {
+    background-color: #0d6efd;
+}
+
+body.dark button:hover {
+    background-color: #0b5ed7;
+}
+
+body.dark button.secondary {
+    background-color: #555;
+}
+
+body.dark button.secondary:hover {
+    background-color: #666;
+}
+
+/* ===== Mobile Layout ===== */
+body.mobile .container {
+    width: 90%;
+    padding: 20px;
+    box-shadow: none;
+    border-radius: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body.mobile h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+body.mobile input,
+body.mobile select {
+    font-size: 1rem;
+    padding: 12px;
+}
+
+body.mobile .button-group {
+    flex-direction: column;
+}
+
+body.mobile button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+}
+
+body.mobile #result {
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
