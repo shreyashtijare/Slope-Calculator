@@ -3,216 +3,125 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Geo Slope Maps — Slope & Map Tools</title>
-
-  <!-- Core CSS -->
+  <title>Slope Calculator — Conversion Added</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Leaflet & Draw -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css"/>
-
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
 </head>
 <body>
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <h2>Tools</h2>
     <ul>
-      <li class="active"><a href="#" id="slopeTool"><i class="fa-solid fa-ruler-vertical"></i> Slope</a></li>
-      <li><a href="#" id="mapsTool"><i class="fa-solid fa-map"></i> Maps</a></li>
-      <li><a href="#" id="volumeTool"><i class="fa-solid fa-cube"></i> Volume</a></li>
-      <li><a href="#" id="angleTool"><i class="fa-solid fa-location-arrow"></i> Angle</a></li>
-      <li><a href="#" id="projectsTool"><i class="fa-solid fa-folder"></i> Projects</a></li>
+      <li class="active"><a href="#" id="slopeTool">Slope Calculator</a></li>
+      <li><a href="#" id="mapsTool">Maps Tool</a></li>
+      <li><a href="#">Volume Calculator</a></li>
+      <li><a href="#">Angle Finder</a></li>
     </ul>
   </div>
 
   <!-- Toggle button -->
-  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">☰</button>
+  <button class="sidebar-toggle" id="sidebarToggle">☰</button>
 
   <!-- Main content -->
   <div class="main-content" id="mainContent">
-    <!-- SLOPE -->
-    <section class="panel" id="slopePanel">
-      <div class="container">
-        <h1>Slope Calculator</h1>
+    <div class="container" id="slopeContainer">
+      <h1>Slope Calculator</h1>
 
-        <div class="input-row">
-          <div class="input-group">
-            <label for="he">Higher Elevation (HE)</label>
-            <input id="he" type="number" step="0.01" />
-          </div>
-          <div class="input-group">
-            <label for="le">Lower Elevation (LE)</label>
-            <input id="le" type="number" step="0.01" />
-          </div>
+      <div class="input-row">
+        <div class="input-group">
+          <label for="he">Higher Elevation (HE)</label>
+          <input id="he" type="number" step="0.01" />
         </div>
-
-        <div class="input-row">
-          <div class="input-group">
-            <label for="distance">Distance</label>
-            <input id="distance" type="number" step="0.01" />
-          </div>
-          <div class="input-group">
-            <label for="distanceUnit">Distance Unit</label>
-            <select id="distanceUnit">
-              <option value="m">meters</option>
-              <option value="ft">feet</option>
-              <option value="km">km</option>
-              <option value="mi">miles</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="input-row">
-          <div class="input-group">
-            <label for="slope">Slope (%)</label>
-            <input id="slope" type="number" step="0.01" />
-          </div>
-          <div class="input-group">
-            <label for="decimalSelect">Precision</label>
-            <select id="decimalSelect">
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2" selected>2</option>
-              <option value="3">3</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="button-row">
-          <button id="calculateBtn">Calculate</button>
-          <button id="resetBtn" class="secondary">Reset</button>
-          <button id="saveCalcBtn" class="secondary"><i class="fa-regular fa-save"></i> Save</button>
-          <button id="exportPdfBtn" class="secondary"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
-        </div>
-
-        <div id="result" class="result"></div>
-
-        <div class="graph-holder" id="slopeGraphHolder" style="display:none;">
-          <canvas id="slopeChart"></canvas>
-        </div>
-
-        <h3>History</h3>
-        <ul id="calcHistory" class="history"></ul>
-      </div>
-    </section>
-
-    <!-- MAPS -->
-    <section class="panel" id="mapsPanel" style="display:none;">
-      <div class="map-controls">
-        <div>
-          <label>Basemap:</label>
-          <select id="basemapSelect">
-            <option value="osm">OpenStreetMap</option>
-            <option value="satellite">Google Satellite (via server export)</option>
-            <option value="terrain">OpenTopoMap</option>
-            <option value="carto">Carto Light</option>
-          </select>
-        </div>
-        <div>
-          <label>Measure:</label>
-          <button id="measureAreaBtn" title="Toggle area measure"><i class="fa-solid fa-drafting-compass"></i></button>
-          <button id="measureDistBtn" title="Toggle distance measure"><i class="fa-solid fa-ruler"></i></button>
-        </div>
-        <div>
-          <label>Export:</label>
-          <select id="exportType">
-            <option value="png">PNG</option>
-            <option value="georef">Geo-referenced ZIP (PNG + PGW + PRJ)</option>
-            <option value="geojson">GeoJSON</option>
-            <option value="kml">KML</option>
-          </select>
-          <button id="exportBtn"><i class="fa-solid fa-download"></i> Export</button>
-        </div>
-        <div>
-          <label>Elevation:</label>
-          <input id="elevKey" placeholder="Google Elevation API key (optional)" />
-          <button id="elevProfileBtn">Profile</button>
+        <div class="input-group">
+          <label for="le">Lower Elevation (LE)</label>
+          <input id="le" type="number" step="0.01" />
         </div>
       </div>
 
+      <div class="input-row">
+        <div class="input-group">
+          <label for="distance">Distance</label>
+          <input id="distance" type="number" step="0.01" />
+        </div>
+        <div class="input-group">
+          <label for="distanceUnit">Distance Unit</label>
+          <select id="distanceUnit">
+            <option value="m">meters</option>
+            <option value="ft">feet</option>
+            <option value="km">km</option>
+            <option value="mi">miles</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-group">
+          <label for="slope">Slope (%)</label>
+          <input id="slope" type="number" step="0.01" />
+        </div>
+        <div class="input-group">
+          <label for="decimalSelect">Precision</label>
+          <select id="decimalSelect">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button id="calculateBtn">Calculate</button>
+        <button id="resetBtn" class="secondary">Reset</button>
+      </div>
+
+      <div id="result" class="result"></div>
+
+      <hr/>
+
+      <!-- Conversion widget -->
+      <div class="conversion">
+        <h2>Slope Conversion</h2>
+        <p>Enter one value (percent, ratio, or angle) and press Convert. Results show all formats. Click <em>Apply</em> to put slope into the calculator.</p>
+
+        <div class="conv-row">
+          <label><input type="radio" name="convType" value="percent" checked> Percent (%)</label>
+          <input id="convPercent" type="number" step="0.01" placeholder="e.g. 50" />
+        </div>
+
+        <div class="conv-row">
+          <label><input type="radio" name="convType" value="ratio"> Ratio (rise:run)</label>
+          <input id="convRatioRise" type="number" step="0.01" placeholder="rise e.g. 1" />
+          <span class="colon">:</span>
+          <input id="convRatioRun" type="number" step="0.01" placeholder="run e.g. 2" />
+        </div>
+
+        <div class="conv-row">
+          <label><input type="radio" name="convType" value="angle"> Angle (°)</label>
+          <input id="convAngle" type="number" step="0.01" placeholder="degrees e.g. 26.565" />
+        </div>
+
+        <div class="conv-buttons">
+          <button id="convertBtn">Convert</button>
+          <button id="applyBtn" class="secondary">Apply to Slope %</button>
+          <button id="clearConvBtn" class="secondary">Clear</button>
+        </div>
+
+        <div id="convResults" class="conv-results" aria-live="polite"></div>
+      </div>
+
+    </div>
+
+    <!-- Map Tool (kept simple for this rebuild) -->
+    <div class="map-container" id="mapContainer" style="display: none;">
+      <h2>Maps Tool</h2>
+      <p>Select an area to capture map imagery:</p>
       <div id="map" class="map-view"></div>
-
-      <div class="map-footer">
-        <div id="cursorLatLng">Lat: — , Lng: —</div>
-        <div id="selectionInfo">Select a shape (draw) to measure / export.</div>
-      </div>
-
-      <div class="map-credits">© Google (satellite imagery) · © OpenStreetMap (tiles)</div>
-    </section>
-
-    <!-- VOLUME (placeholder: basic) -->
-    <section class="panel" id="volumePanel" style="display:none;">
-      <div class="container">
-        <h1>Volume Calculator</h1>
-        <p>Trench / simple prism volume calculator (add cross-sections later).</p>
-        <div class="input-group">
-          <label>Length</label><input id="volLength" type="number" step="0.01"/>
-        </div>
-        <div class="input-group">
-          <label>Width</label><input id="volWidth" type="number" step="0.01"/>
-        </div>
-        <div class="input-group">
-          <label>Depth</label><input id="volDepth" type="number" step="0.01"/>
-        </div>
-        <div class="button-row">
-          <button id="volCalcBtn">Calculate Volume</button>
-        </div>
-        <div id="volResult"></div>
-      </div>
-    </section>
-
-    <!-- ANGLE -->
-    <section class="panel" id="anglePanel" style="display:none;">
-      <div class="container">
-        <h1>Angle Finder</h1>
-        <p>Click three points on the map to measure angles (or enter coords).</p>
-        <div id="angleInstructions">Use the Maps tool, draw markers, then click "Get Angle".</div>
-        <div class="button-row">
-          <button id="getAngleBtn">Get Angle from last 3 markers</button>
-          <button id="clearMarkersBtn" class="secondary">Clear markers</button>
-        </div>
-        <div id="angleResult"></div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="panel" id="projectsPanel" style="display:none;">
-      <div class="container">
-        <h1>Projects</h1>
-        <div class="input-group">
-          <label>Project name</label>
-          <input id="projectName"/>
-        </div>
-        <div class="button-row">
-          <button id="saveProjectBtn">Save Project</button>
-          <button id="loadProjectBtn" class="secondary">Load Project</button>
-        </div>
-        <ul id="projectsList"></ul>
-      </div>
-    </section>
+      <button id="backToCalc" class="secondary">Back to Calculator</button>
+    </div>
   </div>
 
-  <!-- Loading overlay -->
-  <div id="loadingOverlay" class="overlay" style="display:none;">
-    <div class="spinner"></div>
-    <div id="loadingText">Working...</div>
-    <div id="progressBar" style="display:none;"><div id="progressFill"></div></div>
-  </div>
-
-  <!-- Toast -->
-  <div id="toast" class="toast" style="display:none;"></div>
-
-  <!-- Libraries -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/turf/6.5.0/turf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
