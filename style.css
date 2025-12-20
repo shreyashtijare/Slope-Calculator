@@ -1,10 +1,10 @@
-/* Basic reset */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f4f6fb;
-  color: #222;
   height: 100vh;
   overflow: hidden;
 }
@@ -14,71 +14,103 @@ body {
   position: fixed;
   left: -220px;
   top: 0;
-  height: 100%;
   width: 220px;
-  background: #1e1e1e;
-  color: #fff;
-  padding-top: 18px;
-  transition: left 0.25s ease;
+  height: 100%;
+  background: #111;
+  color: white;
   z-index: 1000;
+  transition: left 0.25s ease;
+  padding-top: 20px;
 }
-.sidebar.open { left: 0; }
-.sidebar h2 { text-align: center; margin: 0 0 12px; font-size: 1.2rem; }
-.sidebar ul { list-style: none; padding: 0; margin: 0; }
-.sidebar ul li a { display: block; padding: 10px 16px; color: #ddd; text-decoration: none; }
-.sidebar ul li a:hover { background: #0b5ed7; color: #fff; }
+.sidebar.open {
+  left: 0;
+}
+.sidebar h2 {
+  text-align: center;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar ul li a {
+  display: block;
+  padding: 12px 16px;
+  color: #ddd;
+  text-decoration: none;
+}
+.sidebar ul li a:hover {
+  background: #0b5ed7;
+  color: white;
+}
 
 /* Toggle */
 .sidebar-toggle {
-  position: fixed; left: 12px; top: 12px; z-index: 1100;
-  background: #007bff; color: white; border: none; padding: 8px 12px; border-radius: 6px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1100;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-/* Main */
-.main-content { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; transition: margin-left 0.25s ease; }
-.main-content.shifted { margin-left: 220px; }
-
-/* Container */
-.container {
-  width: 760px;
-  max-width: 100%;
-  background: white;
-  padding: 18px;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(16,24,40,0.08);
+/* Panels */
+.panel {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.panel.active {
+  display: block;
 }
 
-/* Inputs */
-.input-row { display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
-.input-group { flex:1; min-width: 160px; }
-label { display:block; margin-bottom:6px; font-weight:600; font-size:0.95rem; }
-input[type=number], select { width:100%; padding: 10px; border-radius: 6px; border: 1px solid #ddd; font-size: 1rem; }
+/* Slope panel */
+.slope-panel {
+  background: #f4f6fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  background: white;
+  padding: 20px;
+  width: 360px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.card input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+.card button {
+  width: 100%;
+  padding: 10px;
+}
 
-/* Buttons */
-.button-row, .conv-buttons { display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
-button { padding:10px 14px; border-radius: 6px; border:none; background:#007bff; color:white; cursor:pointer; }
-button.secondary { background:#6c757d; }
+/* FULLSCREEN MAP */
+.map-panel {
+  background: #000;
+}
+#map {
+  width: 100%;
+  height: 100%;
+}
 
-/* Results */
-.result { margin-top: 12px; font-weight:700; }
-
-/* Conversion widget */
-.conversion { margin-top: 12px; padding:12px; border-radius:8px; background:#fafafa; border:1px solid #eee; }
-.conversion h2 { margin:0 0 8px 0; font-size:1.05rem; }
-.conv-row { display:flex; gap:8px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
-.conv-row input { padding:8px; border-radius:6px; border:1px solid #ddd; min-width:120px; }
-.conv-row .colon { font-weight:700; padding:0 4px; }
-
-/* Conversion results */
-.conv-results { margin-top:10px; padding:10px; border-radius:6px; background:#fff; border:1px solid #eee; min-height:42px; }
-
-/* Map container */
-.map-container { width: 100%; max-width: 1100px; text-align: center; }
-.map-view { width: 90%; height: 500px; margin: 10px auto; border-radius: 10px; box-shadow: 0 6px 18px rgba(16,24,40,0.06); }
-
-/* Responsive */
-@media (max-width: 900px) {
-  .container { width: 96%; }
-  .map-view { height: 360px; }
+/* Floating map UI */
+.map-ui {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 500;
+}
+.map-ui button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
 }
