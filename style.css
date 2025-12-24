@@ -15,7 +15,7 @@ body {
   position: fixed;
   top: 0;
   left: -220px;
-  width: 120px;
+  width: 220px;
   height: 100%;
   background: #111;
   color: white;
@@ -44,7 +44,7 @@ body {
   color: white;
 }
 
-/* SMALL toggle button (FIXED) */
+/* Small toggle */
 .sidebar-toggle {
   position: fixed;
   top: 10px;
@@ -72,7 +72,7 @@ body {
   display: block;
 }
 
-/* GRID LAYOUT (3 columns) */
+/* Grid layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -85,18 +85,6 @@ body {
   padding: 16px;
   border-radius: 10px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-/* Placeholder */
-.placeholder {
-  color: #777;
-}
-.placeholder.full {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 /* Inputs */
@@ -129,16 +117,23 @@ button {
   border: none;
   background: #007bff;
   color: white;
-  cursor: pointer;
 }
 button.secondary {
   background: #6c757d;
 }
 
-/* Result */
 .result {
   margin-top: 12px;
   font-weight: 600;
+}
+
+/* FULLSCREEN MAP */
+#mapPanel {
+  padding: 0;
+}
+#map {
+  width: 100%;
+  height: 100%;
 }
 
 /* Responsive */
