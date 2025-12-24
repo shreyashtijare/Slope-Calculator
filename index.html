@@ -5,6 +5,9 @@
   <title>Engineering Tools</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Maps JS API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY"></script>
 </head>
 <body>
 
@@ -17,15 +20,14 @@
   </ul>
 </div>
 
-<!-- Small toggle button (FIXED) -->
+<!-- Small toggle button -->
 <button class="sidebar-toggle" id="sidebarToggle">☰</button>
 
-<!-- SLOPE PANEL -->
+<!-- ================= SLOPE PANEL ================= -->
 <div class="panel active" id="slopePanel">
-
   <div class="grid">
 
-    <!-- COLUMN 1: Calculator -->
+    <!-- Column 1 -->
     <div class="card">
       <h2>Slope Calculator</h2>
 
@@ -47,7 +49,7 @@
       <div id="result" class="result"></div>
     </div>
 
-    <!-- COLUMN 2: Conversion -->
+    <!-- Column 2 -->
     <div class="card">
       <h2>Slope Conversion</h2>
 
@@ -69,21 +71,18 @@
       <div id="convResult" class="result"></div>
     </div>
 
-    <!-- COLUMN 3: Empty placeholder -->
+    <!-- Column 3 -->
     <div class="card placeholder">
       <h2>Future Tool</h2>
-      <p>This space is reserved for upcoming features.</p>
+      <p>Reserved for upcoming features.</p>
     </div>
 
   </div>
 </div>
 
-<!-- MAP PANEL (empty for now) -->
+<!-- ================= MAP PANEL ================= -->
 <div class="panel" id="mapPanel">
-  <div class="placeholder full">
-    <h1>Maps Tool</h1>
-    <p>Coming next 🚀</p>
-  </div>
+  <div id="map"></div>
 </div>
 
 <script src="script.js"></script>
