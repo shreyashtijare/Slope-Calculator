@@ -1,58 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Slope Calculator + Google Maps</title>
+  <meta charset="UTF-8" />
+  <title>Slope Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Google Maps JS API (PUT YOUR KEY) -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY&libraries=drawing"></script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-  <h2>Tools</h2>
-  <ul>
-    <li><a href="#" data-panel="slopePanel">Slope Calculator</a></li>
-    <li><a href="#" data-panel="mapPanel">Maps Tool</a></li>
-  </ul>
-</div>
+<div class="app">
 
-<!-- Toggle -->
-<button class="sidebar-toggle" id="sidebarToggle">☰</button>
-
-<!-- Panels -->
-<div class="panel slope-panel" id="slopePanel">
-  <div class="card">
+  <header>
     <h1>Slope Calculator</h1>
+    <p>Calculate slope, distance, or elevation — with conversions</p>
+  </header>
 
-    <label>Higher Elevation</label>
-    <input id="he" type="number">
+  <!-- Calculator -->
+  <section class="card">
+    <h2>Calculator</h2>
 
-    <label>Lower Elevation</label>
-    <input id="le" type="number">
+    <label>Higher Elevation (HE)</label>
+    <input type="number" id="he" placeholder="e.g. 120.5">
 
-    <label>Distance</label>
-    <input id="distance" type="number">
+    <label>Lower Elevation (LE)</label>
+    <input type="number" id="le" placeholder="e.g. 100">
+
+    <label>Horizontal Distance</label>
+    <input type="number" id="distance" placeholder="e.g. 40">
 
     <label>Slope (%)</label>
-    <input id="slope" type="number">
+    <input type="number" id="slope" placeholder="e.g. 50">
 
     <button id="calculateBtn">Calculate</button>
-    <div id="result"></div>
-  </div>
-</div>
+    <button id="resetBtn" class="secondary">Reset</button>
 
-<!-- FULLSCREEN MAP -->
-<div class="panel map-panel" id="mapPanel">
-  <div id="map"></div>
+    <div id="result" class="result"></div>
+  </section>
 
-  <!-- Floating controls -->
-  <div class="map-ui">
-    <button id="clearShapes">Clear</button>
-  </div>
+  <!-- Conversion -->
+  <section class="card">
+    <h2>Slope Conversion</h2>
+
+    <label>Percent (%)</label>
+    <input type="number" id="convPercent" placeholder="50">
+
+    <label>Ratio (rise : run)</label>
+    <div class="ratio">
+      <input type="number" id="ratioRise" placeholder="1">
+      <span>:</span>
+      <input type="number" id="ratioRun" placeholder="2">
+    </div>
+
+    <label>Angle (degrees)</label>
+    <input type="number" id="convAngle" placeholder="26.565">
+
+    <button id="convertBtn">Convert</button>
+
+    <div id="convResult" class="result"></div>
+  </section>
+
 </div>
 
 <script src="script.js"></script>
