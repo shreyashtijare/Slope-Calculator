@@ -1,116 +1,79 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  left: -220px;
-  top: 0;
-  width: 220px;
-  height: 100%;
-  background: #111;
-  color: white;
-  z-index: 1000;
-  transition: left 0.25s ease;
-  padding-top: 20px;
-}
-.sidebar.open {
-  left: 0;
-}
-.sidebar h2 {
-  text-align: center;
-}
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-.sidebar ul li a {
-  display: block;
-  padding: 12px 16px;
-  color: #ddd;
-  text-decoration: none;
-}
-.sidebar ul li a:hover {
-  background: #0b5ed7;
-  color: white;
-}
-
-/* Toggle */
-.sidebar-toggle {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1100;
-  padding: 10px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* Panels */
-.panel {
-  position: absolute;
-  inset: 0;
-  display: none;
-}
-.panel.active {
-  display: block;
-}
-
-/* Slope panel */
-.slope-panel {
   background: #f4f6fb;
+  color: #222;
+}
+
+.app {
+  max-width: 520px;
+  margin: auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin-bottom: 4px;
+}
+
+.card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.ratio {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-.card {
-  background: white;
-  padding: 20px;
-  width: 360px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-.card input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-}
-.card button {
-  width: 100%;
-  padding: 10px;
+  gap: 6px;
 }
 
-/* FULLSCREEN MAP */
-.map-panel {
-  background: #000;
-}
-#map {
+button {
+  margin-top: 14px;
   width: 100%;
-  height: 100%;
-}
-
-/* Floating map UI */
-.map-ui {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 500;
-}
-.map-ui button {
   padding: 10px;
-  border: none;
   border-radius: 6px;
-  background: white;
+  border: none;
+  font-size: 1rem;
+  background: #007bff;
+  color: white;
   cursor: pointer;
+}
+
+button.secondary {
+  background: #6c757d;
+}
+
+.result {
+  margin-top: 12px;
+  font-weight: 600;
 }
