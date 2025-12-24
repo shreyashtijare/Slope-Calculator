@@ -1,28 +1,23 @@
 /* -------- Sidebar -------- */
 const sidebar = document.getElementById("sidebar");
-const toggle = document.getElementById("sidebarToggle");
-
-toggle.onclick = () => {
+document.getElementById("sidebarToggle").onclick = () => {
   sidebar.classList.toggle("open");
 };
 
-/* -------- Panel Navigation (FIXED) -------- */
+/* -------- Panel Navigation -------- */
 const panels = document.querySelectorAll(".panel");
 
 document.querySelectorAll(".sidebar a").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
-
-    // Close sidebar
     sidebar.classList.remove("open");
 
-    // Switch panels
     panels.forEach(p => p.classList.remove("active"));
     document.getElementById(link.dataset.panel).classList.add("active");
   });
 });
 
-/* -------- Slope Calculator -------- */
+/* -------- Slope Calculator (FIXED FORMULA) -------- */
 const he = document.getElementById("he");
 const le = document.getElementById("le");
 const distance = document.getElementById("distance");
@@ -35,32 +30,38 @@ document.getElementById("calculateBtn").onclick = () => {
   const D = parseFloat(distance.value);
   const S = parseFloat(slope.value);
 
-  if ([HE, LE, D, S].filter(v => !isNaN(v)).length < 3) {
+  const filled = [HE, LE, D, S].filter(v => !isNaN(v)).length;
+  if (filled < 3) {
     result.textContent = "⚠️ Enter any 3 values.";
     return;
   }
 
   if (isNaN(S)) {
+    // ((HE - LE) / Distance) * 100
     slope.value = (((HE - LE) / D) * 100).toFixed(3);
     result.textContent = "Slope calculated.";
-  } else if (isNaN(D)) {
+  } 
+  else if (isNaN(D)) {
     distance.value = ((HE - LE) / (S / 100)).toFixed(3);
     result.textContent = "Distance calculated.";
-  } else if (isNaN(HE)) {
-    he.value = (LE + D * (S / 100)).toFixed(3);
+  } 
+  else if (isNaN(HE)) {
+    he.value = (LE + (D * (S / 100))).toFixed(3);
     result.textContent = "Higher elevation calculated.";
-  } else if (isNaN(LE)) {
-    le.value = (HE - D * (S / 100)).toFixed(3);
+  } 
+  else if (isNaN(LE)) {
+    le.value = (HE - (D * (S / 100))).toFixed(3);
     result.textContent = "Lower elevation calculated.";
   }
 };
 
+/* Reset */
 document.getElementById("resetBtn").onclick = () => {
   he.value = le.value = distance.value = slope.value = "";
   result.textContent = "";
 };
 
-/* -------- Conversion -------- */
+/* -------- Slope Conversion (FIXED) -------- */
 document.getElementById("convertBtn").onclick = () => {
   const p = parseFloat(document.getElementById("convPercent").value);
   const r = parseFloat(document.getElementById("ratioRise").value);
@@ -69,16 +70,35 @@ document.getElementById("convertBtn").onclick = () => {
   const out = document.getElementById("convResult");
 
   if (!isNaN(p)) {
-    out.innerHTML = `${p}% → 1:${(100/p).toFixed(3)} | ${Math.atan(p/100)*180/Math.PI.toFixed(3)}°`;
+    const angle = Math.atan(p / 100) * 180 / Math.PI;
+    out.innerHTML = `
+      ${p}%<br>
+      Ratio: 1 : ${(100 / p).toFixed(3)}<br>
+      Angle: ${angle.toFixed(3)}°
+    `;
     return;
   }
+
   if (!isNaN(r) && !isNaN(run)) {
-    out.innerHTML = `${r}:${run} → ${(r/run*100).toFixed(3)}%`;
+    const percent = (r / run) * 100;
+    const angle = Math.atan(r / run) * 180 / Math.PI;
+    out.innerHTML = `
+      ${r}:${run}<br>
+      Percent: ${percent.toFixed(3)}%<br>
+      Angle: ${angle.toFixed(3)}°
+    `;
     return;
   }
+
   if (!isNaN(a)) {
-    out.innerHTML = `${a}° → ${(Math.tan(a*Math.PI/180)*100).toFixed(3)}%`;
+    const percent = Math.tan(a * Math.PI / 180) * 100;
+    out.innerHTML = `
+      ${a}°<br>
+      Percent: ${percent.toFixed(3)}%<br>
+      Ratio: 1 : ${(100 / percent).toFixed(3)}
+    `;
     return;
   }
+
   out.textContent = "⚠️ Enter a value to convert.";
 };
