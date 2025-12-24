@@ -2,63 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Slope Calculator</title>
+  <title>Engineering Tools</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="app">
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <h2>Tools</h2>
+  <ul>
+    <li><a href="#" data-panel="slopePanel">Slope Calculator</a></li>
+    <li><a href="#" data-panel="placeholderPanel">Maps Tool</a></li>
+  </ul>
+</div>
 
-  <header>
-    <h1>Slope Calculator</h1>
-    <p>Calculate slope, distance, or elevation — with conversions</p>
-  </header>
+<!-- Sidebar toggle -->
+<button class="sidebar-toggle" id="sidebarToggle">☰</button>
 
-  <!-- Calculator -->
-  <section class="card">
-    <h2>Calculator</h2>
+<!-- Panels -->
 
-    <label>Higher Elevation (HE)</label>
-    <input type="number" id="he" placeholder="e.g. 120.5">
+<!-- Slope Calculator Panel -->
+<div class="panel active" id="slopePanel">
+  <div class="app">
 
-    <label>Lower Elevation (LE)</label>
-    <input type="number" id="le" placeholder="e.g. 100">
+    <header>
+      <h1>Slope Calculator</h1>
+      <p>Calculate slope, distance, or elevation</p>
+    </header>
 
-    <label>Horizontal Distance</label>
-    <input type="number" id="distance" placeholder="e.g. 40">
+    <!-- Calculator -->
+    <section class="card">
+      <h2>Calculator</h2>
 
-    <label>Slope (%)</label>
-    <input type="number" id="slope" placeholder="e.g. 50">
+      <label>Higher Elevation (HE)</label>
+      <input type="number" id="he">
 
-    <button id="calculateBtn">Calculate</button>
-    <button id="resetBtn" class="secondary">Reset</button>
+      <label>Lower Elevation (LE)</label>
+      <input type="number" id="le">
 
-    <div id="result" class="result"></div>
-  </section>
+      <label>Horizontal Distance</label>
+      <input type="number" id="distance">
 
-  <!-- Conversion -->
-  <section class="card">
-    <h2>Slope Conversion</h2>
+      <label>Slope (%)</label>
+      <input type="number" id="slope">
 
-    <label>Percent (%)</label>
-    <input type="number" id="convPercent" placeholder="50">
+      <button id="calculateBtn">Calculate</button>
+      <button id="resetBtn" class="secondary">Reset</button>
 
-    <label>Ratio (rise : run)</label>
-    <div class="ratio">
-      <input type="number" id="ratioRise" placeholder="1">
-      <span>:</span>
-      <input type="number" id="ratioRun" placeholder="2">
-    </div>
+      <div id="result" class="result"></div>
+    </section>
 
-    <label>Angle (degrees)</label>
-    <input type="number" id="convAngle" placeholder="26.565">
+    <!-- Conversion -->
+    <section class="card">
+      <h2>Slope Conversion</h2>
 
-    <button id="convertBtn">Convert</button>
+      <label>Percent (%)</label>
+      <input type="number" id="convPercent">
 
-    <div id="convResult" class="result"></div>
-  </section>
+      <label>Ratio (rise : run)</label>
+      <div class="ratio">
+        <input type="number" id="ratioRise">
+        <span>:</span>
+        <input type="number" id="ratioRun">
+      </div>
 
+      <label>Angle (degrees)</label>
+      <input type="number" id="convAngle">
+
+      <button id="convertBtn">Convert</button>
+
+      <div id="convResult" class="result"></div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Placeholder Panel -->
+<div class="panel" id="placeholderPanel">
+  <div class="placeholder">
+    <h1>Maps Tool</h1>
+    <p>Coming next 🚀</p>
+  </div>
 </div>
 
 <script src="script.js"></script>
