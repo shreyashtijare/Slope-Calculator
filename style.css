@@ -142,3 +142,55 @@ button.secondary {
     grid-template-columns: 1fr;
   }
 }
+
+/* Map toolbar */
+.map-toolbar {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  z-index: 500;
+}
+.map-toolbar button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Context menu */
+.context-menu {
+  position: absolute;
+  display: none;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 2000;
+  overflow: hidden;
+}
+.context-menu div {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.context-menu div:hover {
+  background: #f0f0f0;
+}
+
+/* Info panel */
+.info-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  padding: 12px 14px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 1500;
+  min-width: 240px;
+  display: none;
+  font-size: 14px;
+}
+
+
