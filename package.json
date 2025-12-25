@@ -2,7 +2,5 @@
   "name": "geo-slope-maps",
   "version": "1.0.0",
   "type": "module"
-  "scripts": {
-    "build": "[my-framework] build --output public"
-  }
+  "scripts": {"build": "[my-framework] build --output public"}
 }
