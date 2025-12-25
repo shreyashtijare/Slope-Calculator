@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 
   <!-- Google Maps JS API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_JS_API_KEY&libraries=drawing,geometry"></script>
 </head>
 <body>
 
@@ -83,8 +83,26 @@
 <!-- ================= MAP PANEL ================= -->
 <div class="panel" id="mapPanel">
   <div id="map"></div>
+
+<div class="map-toolbar">
+  <button id="clearShape">Clear Shape</button>
+</div>
+
 </div>
 
 <script src="script.js"></script>
+
+<!-- Right-click context menu -->
+<div id="contextMenu" class="context-menu">
+  <div data-action="coords">Show Coordinates</div>
+  <div data-action="area">Calculate Area</div>
+  <div data-action="startDistance">Start Distance Measure</div>
+  <div data-action="finishDistance">Finish Distance Measure</div>
+  <div data-action="export">Export Map</div>
+</div>
+
+<!-- Info panel -->
+<div id="infoPanel" class="info-panel"></div>
+
 </body>
 </html>
