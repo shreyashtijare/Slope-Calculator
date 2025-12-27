@@ -1,3 +1,38 @@
+/* -------- Load Google Maps API Dynamically -------- */
+let googleMapsLoaded = false;
+
+async function loadGoogleMaps() {
+  if (googleMapsLoaded) return true;
+  
+  try {
+    // Fetch API key from serverless function
+    const response = await fetch('/api/maps-config');
+    const data = await response.json();
+    
+    // Create and load the Google Maps script
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${data.apiKey}&libraries=drawing,geometry`;
+    script.async = true;
+    script.defer = true;
+    
+    // Wait for script to load
+    await new Promise((resolve, reject) => {
+      script.onload = () => {
+        googleMapsLoaded = true;
+        resolve();
+      };
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+    
+    console.log('Google Maps loaded successfully');
+    return true;
+  } catch (error) {
+    console.error('Error loading Google Maps:', error);
+    return false;
+  }
+}
+
 /* -------- Sidebar -------- */
 const sidebar = document.getElementById("sidebar");
 document.getElementById("sidebarToggle").onclick = () => {
@@ -18,9 +53,8 @@ let measuringDistance = false;
 const contextMenu = document.getElementById("contextMenu");
 const infoPanel = document.getElementById("infoPanel");
 
-
 document.querySelectorAll(".sidebar a").forEach(link => {
-  link.addEventListener("click", e => {
+  link.addEventListener("click", async (e) => {
     e.preventDefault();
     sidebar.classList.remove("open");
 
@@ -31,8 +65,14 @@ document.querySelectorAll(".sidebar a").forEach(link => {
     // Initialize or resize map
     if (link.dataset.panel === "mapPanel") {
       if (!mapInitialized) {
-        initMap();
-        mapInitialized = true;
+        // Load Google Maps API first
+        const loaded = await loadGoogleMaps();
+        if (loaded) {
+          initMap();
+          mapInitialized = true;
+        } else {
+          alert('Failed to load Google Maps. Please check your internet connection.');
+        }
       } else {
         google.maps.event.trigger(map, "resize");
         map.setCenter(map.getCenter());
@@ -152,27 +192,28 @@ function initMap() {
     // Stop drawing mode after one shape
     drawingManager.setDrawingMode(null);
   });
+
   // Right-click (context menu)
-map.addListener("rightclick", e => {
-  contextLatLng = e.latLng;
+  map.addListener("rightclick", e => {
+    contextLatLng = e.latLng;
 
-  contextMenu.style.left = e.pixel.x + "px";
-  contextMenu.style.top = e.pixel.y + "px";
-  contextMenu.style.display = "block";
-});
+    contextMenu.style.left = e.pixel.x + "px";
+    contextMenu.style.top = e.pixel.y + "px";
+    contextMenu.style.display = "block";
+  });
 
-// Hide menu on click
-map.addListener("click", () => {
-  contextMenu.style.display = "none";
+  // Hide menu on click
+  map.addListener("click", () => {
+    contextMenu.style.display = "none";
 
-  if (measuringDistance) {
-    distancePath.push(contextLatLng);
-    updateDistanceLine();
-  }
-});
+    if (measuringDistance) {
+      distancePath.push(contextLatLng);
+      updateDistanceLine();
+    }
+  });
 }
 
-// Add show/hide helpers for the info panel after initMap()
+// Add show/hide helpers for the info panel
 function showInfo(html) {
   infoPanel.innerHTML = html;
   infoPanel.style.display = "block";
@@ -212,7 +253,7 @@ contextMenu.addEventListener("click", e => {
   const lat = contextLatLng.lat();
   const lng = contextLatLng.lng();
 
-  // 1Coordinates
+  // 1. Coordinates
   if (action === "coords") {
     showInfo(`
       <b>Coordinates</b><br>
@@ -221,7 +262,7 @@ contextMenu.addEventListener("click", e => {
     `);
   }
 
-  // 2Calculate Area
+  // 2. Calculate Area
   if (action === "area") {
     if (!activeShape) {
       showInfo("⚠️ Draw a polygon or rectangle first.");
@@ -251,7 +292,7 @@ contextMenu.addEventListener("click", e => {
     `);
   }
 
-  // 3Start distance measure
+  // 3. Start distance measure
   if (action === "startDistance") {
     measuringDistance = true;
     distancePath = [];
@@ -265,7 +306,7 @@ contextMenu.addEventListener("click", e => {
     showInfo("📏 Distance measurement started.<br>Click to add points.");
   }
 
-  // 4Finish distance measure
+  // 4. Finish distance measure
   if (action === "finishDistance") {
     measuringDistance = false;
     const length =
@@ -277,7 +318,7 @@ contextMenu.addEventListener("click", e => {
     `);
   }
 
-  // 5 Export map image
+  // 5. Export map image
   if (action === "export") {
     if (!activeShape) {
       showInfo("⚠️ Draw an area first.");
@@ -321,10 +362,8 @@ contextMenu.addEventListener("click", e => {
   }
 });
 
-
 function updateDistanceLine() {
   if (distanceLine) {
     distanceLine.setPath(distancePath);
   }
 }
-
