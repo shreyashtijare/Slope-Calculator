@@ -244,6 +244,7 @@ document.getElementById("clearShape").onclick = () => {
 };
 
 // Context menu actions
+if (contextMenu) {
 contextMenu.addEventListener("click", e => {
   const action = e.target.dataset.action;
   contextMenu.style.display = "none";
