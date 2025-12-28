@@ -11,7 +11,7 @@ async function loadGoogleMaps() {
     
     // Create and load the Google Maps script
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${data.apiKey}&libraries=drawing,geometry`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${data.apiKey}&libraries=geometry&libraries=drawing&v=weekly`;
     script.async = true;
     script.defer = true;
     
